@@ -1,6 +1,9 @@
 // server.js
 import express from "express";
-import { huggingFaceFunction } from './huggingFaceFunction.js';
+// import { huggingFaceFunction } from './huggingFaceFunction.js';
+// import { textSummarization } from './textSumm.js';
+// import { textClassification } from './textClassification.js';
+import { chatCompletion } from './chatCompletion.js';
 
 const app = express();
 
@@ -8,12 +11,12 @@ app.use(express.static("public")); // serve your frontend files
 
 app.get("/chat", async (req, res) => {
      try {
-    const text = await huggingFaceFunction();
+    const text = await chatCompletion();
     res.json({ text });
     console.log(text);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "HF setup failed failed" });
+    res.status(500).json({ error: "HF setup failed" });
   }
 })
 
